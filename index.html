@@ -1,0 +1,2298 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex,nofollow,noarchive">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="CardBai — Authentic Japanese & Global Pokémon TCG. Independent retailer. Factory sealed, US shipping. Reference-video skeleton prototype.">
+<title>CardBai — Cards & Collectibles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700;800&family=Archivo+Narrow:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:            #0A0F1E;
+  --ink-2:          #111729;
+  --ink-3:          #1A2238;
+  --paper:          #EEF1F6;
+  --paper-2:        #F7F9FC;
+  --steel:          #DDE3EC;
+  --slate:          #5C6780;
+  --slate-2:        #8A94AC;
+  --line:           #C2C9D4;
+  --cobalt:         #1B40E0;
+  --cobalt-bright:  #2B52FF;
+  --volt-teal:      #00D9C0;
+  --blaze-orange:   #FF4D00;
+  --shock-magenta:  #FF007F;
+  --prism-violet:   #7B2CFF;
+  --ink-stock:      #067A3D;
+  --amber:          #B86300;
+  --grey-out:       #8B93A7;
+  --white:          #FFFFFF;
+  --r-card: 0;
+  --r-btn:  0;
+  --shadow-hard-1: 6px 6px 0 0 var(--ink);
+  --shadow-hard-2: 9px 9px 0 0 var(--ink);
+  --shadow-soft-1: 0 6px 18px rgba(10,15,30,.08);
+  --content: 1240px;
+  --pad-x: 32px;
+  --font-d: "Archivo Black", "Inter", sans-serif;
+  --font-h: "Archivo", "Inter", sans-serif;
+  --font-n: "Archivo Narrow", "Inter", sans-serif;
+  --font-b: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --diag-blue:  #1854F2;
+  --diag-red:   #E84A1F;
+}
+* { box-sizing: border-box; }
+html { min-width: 320px; scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-b);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+body.is-modal-open { overflow: hidden; }
+img, svg { display: block; max-width: 100%; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; background: transparent; border: 0; padding: 0; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 3px solid rgba(27,64,224,.35); outline-offset: 3px; }
+.sr-only { position: absolute; clip: rect(0 0 0 0); width: 1px; height: 1px; overflow: hidden; }
+
+.container { width: min(var(--content), calc(100% - var(--pad-x) * 2)); margin: 0 auto; }
+
+/* ========== Reveal ========== */
+[data-reveal] {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1);
+}
+[data-reveal="left"]  { transform: translateX(-40px); }
+[data-reveal="right"] { transform: translateX(40px); }
+[data-reveal="rise"]  { transform: translateY(40px); }
+[data-reveal="clip-l"] { clip-path: inset(0 100% 0 0); transform: none; }
+[data-reveal="clip-r"] { clip-path: inset(0 0 0 100%); transform: none; }
+[data-reveal].is-revealed { opacity: 1; transform: none; clip-path: inset(0 0 0 0); }
+[data-reveal-stagger] > * {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+[data-reveal-stagger].is-revealed > * { opacity: 1; transform: none; }
+[data-reveal-stagger].is-revealed > *:nth-child(2) { transition-delay: .12s }
+[data-reveal-stagger].is-revealed > *:nth-child(3) { transition-delay: .22s }
+[data-reveal-stagger].is-revealed > *:nth-child(4) { transition-delay: .32s }
+[data-reveal-stagger].is-revealed > *:nth-child(5) { transition-delay: .42s }
+[data-reveal-stagger].is-revealed > *:nth-child(6) { transition-delay: .52s }
+[data-reveal-stagger].is-revealed > *:nth-child(7) { transition-delay: .62s }
+[data-reveal-stagger].is-revealed > *:nth-child(8) { transition-delay: .72s }
+
+/* ========== HEADER ========== */
+.site-header {
+  position: sticky; top: 0; z-index: 50;
+  background: var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.header-inner {
+  min-height: 78px;
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  align-items: stretch;
+  gap: 18px;
+  padding: 0 28px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 12px; align-self: center;
+}
+.brand-mark {
+  position: relative; width: 36px; height: 36px;
+  background: var(--cobalt);
+  display: grid; place-items: center;
+  color: #fff; font-family: var(--font-d);
+  font-size: 18px; line-height: 1;
+  box-shadow: var(--shadow-hard-1);
+}
+.brand-mark::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 5px;
+  background: var(--volt-teal);
+}
+.brand-name {
+  font-family: var(--font-d);
+  font-size: 22px;
+  color: #fff;
+  letter-spacing: .5px;
+  line-height: 1;
+}
+.brand-name b { color: var(--volt-teal); font-family: var(--font-d); }
+
+.card-tab-nav {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  align-items: end;
+  align-self: end;
+  min-width: 0;
+  background: var(--ink);
+  padding: 0 24px 0 24px;
+  gap: 4px;
+}
+.card-tab {
+  position: relative;
+  min-width: 0;
+  padding: 14px 12px 10px;
+  display: grid; place-items: center;
+  color: var(--slate-2);
+  font-family: var(--font-n);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  background: var(--ink-2);
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), color .2s ease, background .2s ease;
+  overflow: hidden; isolation: isolate;
+}
+.card-tab::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px;
+  background: transparent; transition: background .2s ease, height .2s ease;
+}
+.card-tab::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.18) 50%, transparent 68%);
+  background-size: 250% 100%;
+  opacity: 0;
+  transition: opacity .25s ease, background-position .35s ease;
+  pointer-events: none; z-index: -1;
+}
+.card-tab:hover, .card-tab.is-active {
+  color: #fff; background: var(--ink-3);
+  transform: translateY(-5px); box-shadow: var(--shadow-hard-1); z-index: 3;
+}
+.card-tab:hover::before, .card-tab.is-active::before { opacity: 1; background-position: 100% 50%; }
+.card-tab.is-active::after { height: 5px; background: var(--cobalt-bright); }
+.card-tab[data-set="teal"].is-active::after    { background: var(--volt-teal); }
+.card-tab[data-set="orange"].is-active::after  { background: var(--blaze-orange); }
+.card-tab[data-set="magenta"].is-active::after { background: var(--shock-magenta); }
+.card-tab[data-set="violet"].is-active::after  { background: var(--prism-violet); }
+
+.header-utils { display: inline-flex; align-items: center; gap: 8px; align-self: center; }
+.util-btn {
+  position: relative;
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  color: var(--slate-2);
+  border: 1px solid rgba(255,255,255,.18);
+  transition: color .2s ease, border-color .2s ease, transform .15s ease;
+}
+.util-btn:hover { color: #fff; border-color: rgba(255,255,255,.5); transform: translateY(-2px); }
+.util-btn--cart { border-color: var(--cobalt); background: var(--cobalt); color: #fff; }
+.util-btn--cart:hover { background: var(--cobalt-bright); }
+.util-btn--cart .badge {
+  position: absolute; top: -6px; right: -6px;
+  min-width: 20px; height: 20px; padding: 0 5px;
+  display: grid; place-items: center;
+  background: var(--volt-teal); color: var(--ink);
+  font-family: var(--font-d); font-size: 11px;
+  border: 2px solid var(--ink);
+}
+.mobile-menu-btn { display: none; }
+@media (max-width: 920px) {
+  .card-tab-nav { display: none; }
+  .mobile-menu-btn { display: grid; }
+  .header-inner { grid-template-columns: 1fr auto auto; padding: 0 16px; min-height: 64px; }
+}
+
+/* ========== SECTION BASE ========== */
+.section { padding: 72px 0; position: relative; }
+.section--ink   { background: var(--ink); color: #fff; }
+.section--paper { background: var(--paper); color: var(--ink); }
+.section--white { background: var(--white); color: var(--ink); }
+@media (max-width: 720px) { .section { padding: 56px 0; } }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2.4px; text-transform: uppercase;
+  color: var(--cobalt);
+}
+.eyebrow::before {
+  content: ""; width: 12px; height: 12px; background: currentColor;
+  display: inline-block;
+}
+.section--ink .eyebrow { color: var(--volt-teal); }
+
+.section-title {
+  font-family: var(--font-d);
+  font-size: clamp(34px, 4.6vw, 64px);
+  line-height: 1;
+  letter-spacing: -.01em;
+  margin: 14px 0 12px;
+}
+.section-title em { font-style: normal; color: var(--cobalt-bright); }
+.section--ink .section-title em { color: var(--volt-teal); }
+.section-sub {
+  font-size: 16px; color: var(--slate);
+  max-width: 720px; margin: 0 0 36px;
+}
+.section--ink .section-sub { color: var(--slate-2); }
+
+.head-block { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 24px; margin-bottom: 36px; }
+.head-block__title-block { min-width: 0; }
+.head-block__side { color: var(--slate); font-family: var(--font-n); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; font-size: 12px; }
+@media (max-width: 720px) { .head-block { grid-template-columns: 1fr; } }
+
+/* ========== BUTTONS ========== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-family: var(--font-d);
+  font-size: 14px; letter-spacing: .6px;
+  text-transform: uppercase;
+  border: 2px solid var(--ink);
+  background: var(--ink);
+  color: #fff;
+  transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover { transform: translate(-2px,-2px); box-shadow: 4px 4px 0 0 var(--cobalt); }
+.btn--cobalt { background: var(--cobalt); border-color: var(--cobalt); }
+.btn--cobalt:hover { background: var(--cobalt-bright); border-color: var(--cobalt-bright); box-shadow: 4px 4px 0 0 var(--ink); }
+.btn--accent { background: var(--volt-teal); color: var(--ink); border-color: var(--ink); }
+.btn--accent:hover { background: var(--cobalt-bright); color: #fff; box-shadow: 4px 4px 0 0 var(--ink); }
+.btn--ghost { background: transparent; color: #fff; border-color: #fff; }
+.btn--ghost:hover { background: #fff; color: var(--ink); box-shadow: 4px 4px 0 0 var(--cobalt); }
+.btn--ghost-dark { background: transparent; color: var(--ink); border-color: var(--ink); }
+.btn--ghost-dark:hover { background: var(--ink); color: #fff; }
+.btn--ink { background: var(--ink); color: #fff; border-color: var(--ink); }
+.btn--ink:hover { background: var(--ink-2); box-shadow: 6px 6px 0 0 var(--cobalt); }
+.btn--added { background: var(--ink-stock) !important; border-color: var(--ink-stock) !important; color: #fff !important; }
+.btn .arr { transition: transform .2s ease; }
+.btn:hover .arr { transform: translateX(4px); }
+
+/* ========== HERO ========== */
+.hero {
+  position: relative;
+  background: var(--ink);
+  color: #fff;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; right: -8%;
+  width: 60%;
+  background: var(--cobalt);
+  clip-path: polygon(14% 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+.hero-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: 56px; align-items: center;
+  min-height: 620px;
+  padding: 80px 0 120px;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2.6px; text-transform: uppercase;
+  color: var(--volt-teal);
+}
+.hero-eyebrow .pip {
+  display: inline-grid; place-items: center;
+  width: 22px; height: 22px;
+  background: var(--volt-teal); color: var(--ink);
+  font-family: var(--font-d); font-size: 14px;
+}
+.hero-title {
+  font-family: var(--font-d);
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: .92;
+  letter-spacing: -.02em;
+  margin: 18px 0 22px;
+}
+.hero-title em { font-style: normal; color: var(--volt-teal); }
+.hero-sub {
+  font-size: 18px; color: var(--slate-2);
+  max-width: 520px; margin: 0 0 32px;
+}
+.hero-cta { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero-trust {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: linear-gradient(180deg, #1854F2 0%, #1854F2 50%, #E84A1F 50%, #E84A1F 100%);
+  color: #fff;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+}
+.hero-trust__cell {
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; padding: 18px 16px;
+  font-family: var(--font-n); font-weight: 700; font-size: 13px;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  border-right: 1px solid rgba(255,255,255,.18);
+}
+.hero-trust__cell:last-child { border-right: 0; }
+.hero-trust__cell svg { width: 18px; height: 18px; flex: none; }
+
+@media (max-width: 920px) {
+  .hero::before { right: -20%; width: 80%; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; min-height: auto; padding: 56px 0 40px; }
+}
+@media (max-width: 720px) {
+  .hero-trust { grid-template-columns: repeat(2, 1fr); }
+  .hero-trust__cell:nth-child(2) { border-right: 0; }
+  .hero-trust__cell:nth-child(1), .hero-trust__cell:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,.18); }
+}
+
+/* Hero visual: angled booster-box display */
+.hero-visual {
+  position: relative;
+  aspect-ratio: 4/3;
+  display: grid; place-items: center;
+}
+.hero-visual__frame {
+  position: absolute; inset: 8% 0 0 0;
+  border: 3px solid #fff;
+  display: grid; place-items: center;
+  background: rgba(0,0,0,.18);
+}
+.hero-visual__frame::before,
+.hero-visual__frame::after {
+  content: ""; position: absolute;
+  width: 22px; height: 22px;
+  background: var(--volt-teal);
+}
+.hero-visual__frame::before { top: -3px; left: -3px; }
+.hero-visual__frame::after { bottom: -3px; right: -3px; background: var(--blaze-orange); }
+.hero-visual svg { width: 78%; height: auto; }
+
+/* ========== SECTION 2: SHOPPING STRIP ========== */
+.strip {
+  background: var(--paper);
+  padding: 64px 0;
+  position: relative;
+}
+.strip-head {
+  text-align: center; margin-bottom: 36px;
+}
+.strip-head .section-title { font-size: clamp(28px, 3.6vw, 48px); }
+.strip-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.strip-card {
+  position: relative;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 28px;
+  min-height: 260px;
+  display: flex; flex-direction: column; justify-content: space-between;
+  box-shadow: var(--shadow-hard-1);
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+  overflow: hidden;
+}
+.strip-card::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 8px;
+  background: var(--sc-color, var(--cobalt));
+}
+.strip-card::after {
+  content: ""; position: absolute; right: -30px; bottom: -30px;
+  width: 120px; height: 120px;
+  background: var(--sc-color, var(--cobalt));
+  transform: rotate(45deg);
+  opacity: .08;
+}
+.strip-card:hover { transform: translate(-3px,-3px); box-shadow: 9px 9px 0 0 var(--ink); }
+.strip-card__eyebrow {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--sc-color, var(--cobalt));
+}
+.strip-card__title {
+  font-family: var(--font-d);
+  font-size: 28px; line-height: 1; margin: 8px 0 14px;
+}
+.strip-card__copy {
+  color: var(--slate); font-size: 14px; line-height: 1.55;
+}
+.strip-card__cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-d); font-size: 13px; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--ink);
+  border-bottom: 3px solid var(--sc-color, var(--cobalt));
+  padding-bottom: 4px; margin-top: 18px;
+}
+@media (max-width: 920px) { .strip-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 3: PRODUCT CATEGORY (cobalt corner brackets) ========== */
+.cat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px;
+}
+.cat-card {
+  position: relative;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 28px 22px 24px;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 280px;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+  overflow: hidden;
+}
+.cat-card::before, .cat-card::after {
+  content: ""; position: absolute; width: 18px; height: 18px;
+  border: 3px solid var(--cobalt); transition: border-color .2s ease, width .2s ease, height .2s ease;
+}
+.cat-card::before { top: -2px; left: -2px; border-right: 0; border-bottom: 0; }
+.cat-card::after  { bottom: -2px; right: -2px; border-left: 0; border-top: 0; }
+.cat-card:hover { transform: translate(-3px,-3px); box-shadow: 7px 7px 0 0 var(--cobalt); }
+.cat-card:hover::before, .cat-card:hover::after { width: 28px; height: 28px; }
+.cat-card__icon {
+  width: 56px; height: 56px;
+  background: var(--cat-color, var(--cobalt));
+  display: grid; place-items: center;
+}
+.cat-card__icon svg { width: 30px; height: 30px; color: #fff; }
+.cat-card__title { font-family: var(--font-d); font-size: 22px; line-height: 1; margin: 6px 0 0; }
+.cat-card__sub { color: var(--slate); font-size: 13px; line-height: 1.5; }
+.cat-card__count {
+  margin-top: auto;
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--cat-color, var(--cobalt));
+  border-top: 1px solid var(--line); padding-top: 14px;
+}
+@media (max-width: 920px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .cat-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 4: WHY SHOP CARDBAI ========== */
+.why-grid {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center;
+}
+.why-list { display: grid; gap: 18px; }
+.why-item {
+  display: grid; grid-template-columns: 56px 1fr; gap: 18px;
+  align-items: start;
+  padding: 14px;
+  border: 2px solid transparent;
+  background: rgba(255,255,255,.03);
+  transition: border-color .2s ease, background .2s ease, transform .18s ease;
+}
+.why-item:hover { border-color: var(--cobalt); background: rgba(43,82,255,.10); transform: translateX(3px); }
+.why-item__icon {
+  width: 56px; height: 56px;
+  display: grid; place-items: center;
+  background: var(--cobalt); color: #fff;
+}
+.why-item__icon svg { width: 28px; height: 28px; }
+.why-item__title { font-family: var(--font-d); font-size: 17px; letter-spacing: .2px; margin: 4px 0 4px; }
+.why-item__copy { color: var(--slate-2); font-size: 14px; line-height: 1.55; }
+
+.why-visual {
+  position: relative;
+  aspect-ratio: 5/6;
+  border: 3px solid #fff;
+  background:
+      radial-gradient(circle at 30% 20%, rgba(0,217,192,.18), transparent 55%),
+      radial-gradient(circle at 70% 80%, rgba(255,77,0,.16), transparent 50%),
+      linear-gradient(160deg, #142244 0%, #0A0F1E 100%);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.why-visual::before,
+.why-visual::after {
+  content: ""; position: absolute;
+  width: 22px; height: 22px;
+  background: var(--volt-teal);
+}
+.why-visual::before { top: -3px; left: -3px; }
+.why-visual::after  { bottom: -3px; right: -3px; background: var(--blaze-orange); }
+.why-visual__center {
+  width: 70%; aspect-ratio: 3/5;
+  background: var(--ink-2);
+  border: 2px solid var(--cobalt);
+  position: relative;
+  display: grid; place-items: center;
+  color: var(--volt-teal);
+  font-family: var(--font-d);
+  font-size: clamp(40px, 5vw, 64px);
+  letter-spacing: -.02em;
+  transform: rotate(-4deg);
+  box-shadow: var(--shadow-hard-1);
+}
+.why-visual__center span { transform: rotate(4deg); display: inline-block; }
+.why-visual__center::after {
+  content: ""; position: absolute; inset: 8px;
+  border: 1px dashed rgba(255,255,255,.18);
+}
+@media (max-width: 920px) { .why-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 5: ABOUT / POKEMON GAME ZONE ========== */
+.about {
+  background: var(--paper-2);
+}
+.about-card {
+  background: var(--cobalt);
+  color: #fff;
+  padding: 56px 48px;
+  border: 3px solid var(--ink);
+  box-shadow: var(--shadow-hard-2);
+  position: relative;
+  overflow: hidden;
+}
+.about-card::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 24px, rgba(255,255,255,.04) 24px 25px);
+}
+.about-card__eyebrow {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2.4px; text-transform: uppercase;
+  color: var(--volt-teal);
+}
+.about-card__title {
+  font-family: var(--font-d);
+  font-size: clamp(28px, 3.6vw, 44px);
+  line-height: 1;
+  margin: 14px 0 16px;
+}
+.about-card__copy {
+  font-size: 16px; line-height: 1.6; max-width: 720px;
+  color: rgba(255,255,255,.92);
+}
+.about-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 36px;
+}
+.about-stat {
+  border: 2px solid #fff;
+  padding: 22px 22px 20px;
+  background: rgba(255,255,255,.06);
+  display: flex; flex-direction: column; gap: 8px;
+  position: relative;
+  transition: transform .18s ease, background .18s ease;
+}
+.about-stat:hover { transform: translate(-2px,-2px); background: rgba(255,255,255,.12); }
+.about-stat__num {
+  font-family: var(--font-d);
+  font-size: clamp(36px, 4vw, 56px); line-height: 1;
+  color: var(--volt-teal);
+}
+.about-stat__lbl {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: rgba(255,255,255,.9);
+}
+.about-stat__desc { color: rgba(255,255,255,.75); font-size: 13px; line-height: 1.55; }
+.about-cta {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-top: 32px;
+}
+@media (max-width: 720px) {
+  .about-card { padding: 36px 22px; }
+  .about-grid { grid-template-columns: 1fr; }
+}
+
+/* ========== SECTION 6: COLLECTOR STANDARDS ========== */
+.std-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+}
+.std {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 28px;
+  position: relative;
+  display: flex; flex-direction: column; gap: 14px;
+  min-height: 240px;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+}
+.std:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-hard-1); }
+.std__num {
+  font-family: var(--font-d);
+  font-size: 56px; line-height: 1;
+  color: var(--cobalt);
+  margin-bottom: -8px;
+}
+.std__title { font-family: var(--font-d); font-size: 20px; line-height: 1.1; }
+.std__copy { color: var(--slate); font-size: 14px; line-height: 1.55; }
+.std__seal {
+  position: absolute; top: 18px; right: 18px;
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  background: var(--std-color, var(--cobalt)); color: #fff;
+  border: 2px solid var(--ink);
+}
+.std__seal svg { width: 22px; height: 22px; }
+@media (max-width: 920px) { .std-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 540px) { .std-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 7: HOT PRODUCT / IN-STOCK PICKS ========== */
+.hot-grid {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px;
+}
+.hot-main {
+  position: relative;
+  background: var(--ink-2);
+  border: 3px solid var(--ink);
+  padding: 32px;
+  display: flex; flex-direction: column;
+  min-height: 540px;
+  color: #fff;
+  overflow: hidden;
+  box-shadow: var(--shadow-hard-2);
+}
+.hot-main::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 30%, rgba(0,217,192,.12), transparent 55%),
+    radial-gradient(circle at 75% 80%, rgba(255,77,0,.12), transparent 55%);
+}
+.hot-main__eyebrow {
+  position: relative; z-index: 1;
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2.4px; text-transform: uppercase; color: var(--volt-teal);
+}
+.hot-main__name {
+  position: relative; z-index: 1;
+  font-family: var(--font-d);
+  font-size: clamp(34px, 4vw, 56px); line-height: .96;
+  margin: 16px 0 8px;
+}
+.hot-main__name em { font-style: normal; color: var(--volt-teal); }
+.hot-main__copy { position: relative; z-index: 1; color: var(--slate-2); max-width: 360px; font-size: 14px; }
+.hot-main__visual {
+  position: relative; z-index: 1;
+  margin: auto 0;
+  display: grid; place-items: center;
+}
+.hot-main__visual svg { width: min(80%, 380px); }
+.hot-main__meta {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.15);
+}
+.hot-main__meta-row { display: flex; flex-direction: column; gap: 4px; }
+.hot-main__meta-row .lbl {
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--slate-2);
+}
+.hot-main__meta-row .val { font-family: var(--font-d); font-size: 16px; color: var(--volt-teal); }
+.hot-main__cta { position: relative; z-index: 1; margin-top: 18px; }
+
+.hot-side {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  align-content: start;
+}
+.hot-card {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  min-height: 250px;
+  position: relative;
+  cursor: pointer;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+}
+.hot-card:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-hard-1); }
+.hot-card__bar {
+  position: absolute; top: 0; left: 0; right: 0; height: 6px;
+  background: var(--hc-color, var(--cobalt));
+}
+.hot-card__code {
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--hc-color, var(--cobalt));
+  margin-top: 8px;
+}
+.hot-card__name { font-family: var(--font-d); font-size: 18px; line-height: 1.05; }
+.hot-card__visual { display: grid; place-items: center; padding: 12px 0; }
+.hot-card__visual svg { width: 100%; max-width: 130px; }
+.hot-card__price { font-family: var(--font-d); font-size: 22px; color: var(--ink); }
+.hot-card__stock {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--ink-stock);
+}
+.hot-card__stock--low { color: var(--amber); }
+.hot-card__stock::before {
+  content: ""; width: 8px; height: 8px; background: currentColor; display: inline-block;
+}
+
+@media (max-width: 920px) { .hot-grid { grid-template-columns: 1fr; } }
+@media (max-width: 540px) { .hot-side { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 8: JAPANESE LARGE BANNER ========== */
+.j-banner {
+  background: var(--diag-blue);
+  color: #fff;
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+.j-banner::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; left: 38%;
+  width: 30%;
+  background: var(--diag-red);
+  clip-path: polygon(20% 0, 100% 0, 80% 100%, 0 100%);
+  z-index: 0;
+}
+.j-banner::after {
+  content: "";
+  position: absolute; top: 0; bottom: 0; right: 0;
+  width: 26%;
+  background: var(--ink);
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+.j-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+.j-text .eyebrow { color: var(--volt-teal); }
+.j-title {
+  font-family: var(--font-d);
+  font-size: clamp(40px, 5.6vw, 80px);
+  line-height: .94;
+  letter-spacing: -.02em;
+  margin: 16px 0 14px;
+}
+.j-title span { display: block; }
+.j-title em { font-style: normal; color: var(--volt-teal); }
+.j-copy { font-size: 17px; max-width: 460px; color: rgba(255,255,255,.92); margin-bottom: 28px; }
+.j-cards {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  transform: rotate(-3deg);
+  transform-origin: center;
+}
+.j-mini {
+  aspect-ratio: 3/5;
+  background: var(--white);
+  border: 2px solid var(--ink);
+  display: grid; place-items: center;
+  box-shadow: 4px 4px 0 0 rgba(0,0,0,.45);
+  position: relative;
+  overflow: hidden;
+}
+.j-mini__tag {
+  position: absolute; top: 8px; left: 8px;
+  font-family: var(--font-n); font-weight: 700; font-size: 10px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--diag-red);
+}
+.j-mini svg { width: 76%; }
+@media (max-width: 920px) {
+  .j-banner::before, .j-banner::after { display: none; }
+  .j-inner { grid-template-columns: 1fr; }
+  .j-cards { transform: none; }
+}
+
+/* ========== SECTION 9: FEATURED SET (8-tile grid) ========== */
+.feat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+}
+.feat {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative;
+  cursor: pointer;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+}
+.feat::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--f-color, var(--cobalt));
+}
+.feat:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-hard-1); }
+.feat__code {
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.4px; text-transform: uppercase; color: var(--f-color, var(--cobalt));
+  margin-top: 4px;
+}
+.feat__name { font-family: var(--font-d); font-size: 16px; line-height: 1.1; min-height: 36px; }
+.feat__visual { display: grid; place-items: center; padding: 8px 0; min-height: 110px; }
+.feat__visual svg { width: 70%; max-width: 110px; }
+.feat__price-row { display: flex; align-items: baseline; gap: 8px; }
+.feat__price { font-family: var(--font-d); font-size: 18px; }
+.feat__moq { font-family: var(--font-n); font-size: 11px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate); }
+.feat__cta {
+  margin-top: 6px;
+  width: 100%;
+  padding: 10px 14px;
+  font-family: var(--font-d); font-size: 12px; letter-spacing: .8px;
+  text-transform: uppercase;
+  background: var(--cobalt); color: #fff;
+  border: 2px solid var(--ink);
+  transition: background .18s ease, transform .15s ease;
+}
+.feat__cta:hover { background: var(--cobalt-bright); transform: translate(-1px,-1px); }
+.feat__cta.is-added { background: var(--ink-stock); }
+
+@media (max-width: 920px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 10: MORE SETS ========== */
+.more-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px;
+}
+.more-tile {
+  background: var(--white);
+  border: 2px solid var(--ink);
+  padding: 24px;
+  display: grid; grid-template-columns: 130px 1fr; gap: 18px; align-items: center;
+  cursor: pointer;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease;
+}
+.more-tile:hover { transform: translate(-3px,-3px); box-shadow: var(--shadow-hard-1); }
+.more-tile__visual {
+  display: grid; place-items: center;
+  background: var(--paper-2);
+  border: 2px solid var(--ink);
+  aspect-ratio: 3/4;
+}
+.more-tile__visual svg { width: 70%; }
+.more-tile__meta { display: flex; flex-direction: column; gap: 6px; }
+.more-tile__name { font-family: var(--font-d); font-size: 18px; line-height: 1.1; }
+.more-tile__sub { color: var(--slate); font-size: 13px; line-height: 1.5; }
+.more-tile__price { font-family: var(--font-d); font-size: 20px; color: var(--ink); margin-top: 4px; }
+.more-tile__cta-row { display: flex; gap: 8px; margin-top: 8px; }
+@media (max-width: 720px) { .more-grid { grid-template-columns: 1fr; } }
+
+/* ========== SECTION 11: FUTURE CARDS ZONE ========== */
+.future {
+  background: var(--ink);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.future::before {
+  content: "";
+  position: absolute; top: 0; bottom: 0; right: 0; width: 45%;
+  background: var(--cobalt);
+  clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+.future-inner {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center;
+}
+.future-title {
+  font-family: var(--font-d);
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: .96;
+  margin: 14px 0 14px;
+}
+.future-title em { font-style: normal; color: var(--volt-teal); }
+.future-copy { color: var(--slate-2); max-width: 480px; margin-bottom: 26px; }
+.future-list { display: grid; gap: 12px; }
+.future-row {
+  display: grid; grid-template-columns: 64px 1fr auto; gap: 16px; align-items: center;
+  padding: 14px 18px;
+  border: 2px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.18);
+  transition: border-color .18s ease, background .18s ease, transform .18s ease;
+}
+.future-row:hover { border-color: var(--volt-teal); background: rgba(0,217,192,.10); transform: translateX(3px); }
+.future-row__code {
+  font-family: var(--font-d);
+  font-size: 20px; color: var(--volt-teal);
+}
+.future-row__name { font-family: var(--font-h); font-weight: 700; font-size: 16px; }
+.future-row__sub { color: var(--slate-2); font-size: 13px; }
+.future-row__tag {
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.4px; text-transform: uppercase;
+  color: var(--blaze-orange);
+  border: 1px solid var(--blaze-orange);
+  padding: 4px 10px;
+}
+.future-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+
+@media (max-width: 920px) {
+  .future::before { width: 100%; clip-path: none; opacity: .25; }
+  .future-inner { grid-template-columns: 1fr; }
+}
+
+/* ========== SECTION 12: BUYING INFO ========== */
+.faq-grid {
+  display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: start;
+}
+.faq-list { display: grid; gap: 10px; }
+.faq {
+  border: 2px solid var(--ink);
+  background: var(--white);
+  transition: box-shadow .18s ease, transform .18s ease;
+}
+.faq.is-open { box-shadow: 5px 5px 0 0 var(--cobalt); }
+.faq__q {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  width: 100%; text-align: left;
+  padding: 18px 22px;
+  font-family: var(--font-d); font-size: 15px; color: var(--ink);
+}
+.faq__q .chev {
+  width: 22px; height: 22px;
+  display: grid; place-items: center;
+  background: var(--cobalt); color: #fff;
+  font-family: var(--font-d); font-size: 14px;
+  transition: transform .25s ease;
+  flex: none;
+}
+.faq.is-open .faq__q .chev { transform: rotate(45deg); background: var(--ink); }
+.faq__a {
+  display: grid; grid-template-rows: 0fr;
+  transition: grid-template-rows .32s ease;
+}
+.faq.is-open .faq__a { grid-template-rows: 1fr; }
+.faq__a-inner { overflow: hidden; }
+.faq__a-body {
+  padding: 0 22px 22px;
+  color: var(--slate); font-size: 14px; line-height: 1.65;
+}
+
+.buy-aside {
+  background: var(--ink);
+  color: #fff;
+  padding: 32px;
+  border: 3px solid var(--ink);
+  position: relative;
+  box-shadow: var(--shadow-hard-1);
+}
+.buy-aside::before {
+  content: ""; position: absolute; top: -3px; right: -3px;
+  width: 26px; height: 26px; background: var(--volt-teal);
+}
+.buy-aside__eyebrow {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2.2px; text-transform: uppercase; color: var(--volt-teal);
+}
+.buy-aside__title {
+  font-family: var(--font-d);
+  font-size: 30px; line-height: 1; margin: 12px 0 12px;
+}
+.buy-aside__copy { color: var(--slate-2); font-size: 14px; line-height: 1.6; margin-bottom: 18px; }
+.buy-aside__list { display: grid; gap: 10px; margin-bottom: 18px; }
+.buy-aside__row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.18);
+}
+.buy-aside__row::before {
+  content: "✓"; width: 18px; height: 18px;
+  display: grid; place-items: center;
+  background: var(--volt-teal); color: var(--ink);
+  font-family: var(--font-d); font-size: 12px;
+}
+
+@media (max-width: 920px) { .faq-grid { grid-template-columns: 1fr; } }
+
+/* ========== FOOTER ========== */
+.footer { background: var(--ink); color: #fff; padding: 64px 0 24px; border-top: 4px solid var(--cobalt); }
+.footer-grid {
+  display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 36px;
+}
+.footer-brand .brand { margin-bottom: 14px; }
+.footer-brand p { color: var(--slate-2); font-size: 14px; line-height: 1.6; max-width: 320px; }
+.footer-col h4 {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--volt-teal); margin: 0 0 14px;
+}
+.footer-col ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.footer-col a { color: var(--slate-2); font-size: 14px; transition: color .18s ease; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 36px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.12);
+  color: var(--slate-2); font-size: 12px;
+}
+@media (max-width: 920px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 540px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ========== QUICK VIEW DRAWER ========== */
+.qv-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,15,30,.55);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 70;
+  backdrop-filter: blur(3px);
+}
+.qv-overlay.is-open { opacity: 1; pointer-events: auto; }
+.qv-drawer {
+  position: fixed; top: 0; right: 0; bottom: 0;
+  width: 440px; max-width: 100vw;
+  background: var(--ink);
+  color: #fff;
+  transform: translateX(110%);
+  transition: transform .42s cubic-bezier(.2,.7,.2,1);
+  z-index: 80;
+  display: flex; flex-direction: column;
+  border-left: 4px solid var(--qv-color, var(--cobalt));
+  box-shadow: -10px 0 0 0 rgba(0,0,0,.4);
+}
+.qv-drawer.is-open { transform: translateX(0); }
+.qv-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 2px solid var(--ink-3);
+}
+.qv-head__brand { font-family: var(--font-d); font-size: 18px; }
+.qv-head__brand b { color: var(--qv-color, var(--volt-teal)); }
+.qv-close {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: var(--qv-color, var(--cobalt)); color: var(--ink);
+  font-family: var(--font-d); font-size: 16px;
+  border: 2px solid var(--qv-color, var(--cobalt));
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+.qv-close:hover { background: var(--ink); color: var(--qv-color, var(--cobalt)); }
+.qv-body { padding: 22px; flex: 1; overflow: auto; }
+.qv-visual {
+  display: grid; place-items: center;
+  background: #fff;
+  padding: 18px; margin-bottom: 18px;
+  border: 2px solid var(--qv-color, var(--cobalt));
+}
+.qv-visual svg { width: 100%; max-width: 260px; }
+.qv-code {
+  font-family: var(--font-n); font-weight: 700; font-size: 12px;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--qv-color, var(--volt-teal));
+}
+.qv-name {
+  font-family: var(--font-d);
+  font-size: 26px; line-height: 1.05;
+  margin: 6px 0 18px;
+}
+.qv-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--ink-3);
+  font-size: 14px;
+}
+.qv-row span:first-child {
+  font-family: var(--font-n); font-size: 11px; letter-spacing: 1.4px;
+  text-transform: uppercase; color: var(--slate-2);
+}
+.qv-row span:last-child { font-family: var(--font-h); font-weight: 700; color: #fff; }
+.qv-row .status--green { color: var(--ink-stock); }
+.qv-row .status--amber { color: var(--amber); }
+.qv-cta {
+  padding: 18px 22px;
+  border-top: 2px solid var(--ink-3);
+  display: grid; gap: 10px;
+}
+.qv-cta .btn { width: 100%; }
+.btn--ghost-light { background: transparent; color: #fff; border-color: var(--qv-color, var(--cobalt)); }
+.btn--ghost-light:hover { background: var(--qv-color, var(--cobalt)); color: var(--ink); }
+
+@media (max-width: 540px) { .qv-drawer { width: 100vw; border-left: 0; } }
+
+/* ========== MOBILE DRAWER ========== */
+.md-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,15,30,.6);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 70;
+  backdrop-filter: blur(4px);
+}
+.md-overlay.is-open { opacity: 1; pointer-events: auto; }
+.md-drawer {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: 320px; max-width: 88vw;
+  background: var(--ink);
+  color: #fff;
+  transform: translateX(-110%);
+  transition: transform .42s cubic-bezier(.2,.7,.2,1);
+  z-index: 80;
+  display: flex; flex-direction: column;
+  border-right: 4px solid var(--cobalt);
+  box-shadow: 10px 0 0 0 rgba(0,0,0,.4);
+}
+.md-drawer.is-open { transform: translateX(0); }
+.md-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 22px;
+  border-bottom: 2px solid var(--ink-3);
+}
+.md-head__brand { font-family: var(--font-d); font-size: 18px; }
+.md-head__brand b { color: var(--volt-teal); }
+.md-close {
+  width: 36px; height: 36px;
+  display: grid; place-items: center;
+  background: var(--cobalt); color: #fff;
+  font-family: var(--font-d); font-size: 16px;
+  border: 2px solid var(--cobalt);
+  transition: background .18s ease, color .18s ease;
+}
+.md-close:hover { background: var(--ink); color: var(--cobalt); border-color: var(--cobalt); }
+.md-body { padding: 14px 14px 22px; flex: 1; overflow: auto; }
+.md-link {
+  position: relative;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 16px;
+  font-family: var(--font-d); font-size: 20px;
+  color: #fff;
+  border-bottom: 1px solid var(--ink-3);
+  transition: padding-left .2s ease, color .2s ease;
+}
+.md-link::before {
+  content: ""; position: absolute; top: 0; left: 0; height: 4px;
+  width: 0; background: var(--md-color, var(--cobalt));
+  transition: width .25s ease;
+}
+.md-link:hover, .md-link.is-active { padding-left: 22px; }
+.md-link:hover::before, .md-link.is-active::before { width: 64px; }
+.md-link[data-set="teal"]    { --md-color: var(--volt-teal); }
+.md-link[data-set="orange"]  { --md-color: var(--blaze-orange); }
+.md-link[data-set="magenta"] { --md-color: var(--shock-magenta); }
+.md-link[data-set="violet"]  { --md-color: var(--prism-violet); }
+.md-link .arr {
+  font-family: var(--font-d); font-size: 16px; color: var(--md-color, var(--cobalt));
+}
+.md-foot {
+  padding: 18px 22px;
+  border-top: 2px solid var(--ink-3);
+  font-family: var(--font-n); font-weight: 700; font-size: 11px;
+  letter-spacing: 1.6px; text-transform: uppercase;
+  color: var(--slate-2);
+}
+.md-foot b { color: var(--volt-teal); }
+
+/* ========== REDUCED MOTION ========== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  [data-reveal] { opacity: 1; transform: none; }
+  [data-reveal-stagger] > * { opacity: 1; transform: none; }
+}
+
+/* ========== HERO SLIDER (visual fill pass) ========== */
+.hero { --slide-accent: var(--volt-teal); --slide-accent-2: var(--cobalt); }
+.hero::before {
+  background: linear-gradient(135deg, var(--slide-accent) 0%, var(--slide-accent-2) 100%);
+  transition: background .9s ease;
+}
+.hero .hero-title em { color: var(--slide-accent); transition: color .7s ease; }
+.hero .hero-eyebrow .pip { background: var(--slide-accent); color: var(--ink); transition: background .7s ease, color .7s ease; }
+.hero-cta .btn--accent { background: var(--slide-accent); color: var(--ink); border-color: var(--slide-accent); }
+.hero-cta .btn--accent:hover { background: var(--ink); color: var(--slide-accent); }
+
+.hero-set { margin: 22px 0 18px; padding-left: 14px; border-left: 3px solid var(--slide-accent); transition: border-color .7s ease; }
+.hero-set__code { font-family: var(--font-n); font-weight: 800; font-size: 11px; letter-spacing: 2.4px; color: var(--slide-accent); text-transform: uppercase; transition: color .7s ease; }
+.hero-set__name { font-family: var(--font-d); font-size: 19px; color: #fff; margin-top: 4px; line-height: 1.25; }
+.hero-set__name em { font-style: normal; color: var(--slate-2); font-family: var(--font-h); font-weight: 700; font-size: 13px; letter-spacing: .3px; }
+[data-slide-code], [data-slide-name], [data-slide-cta] { display: inline-block; transition: opacity .4s ease, transform .4s ease; }
+
+.hero-controls { display: flex; align-items: center; gap: 14px; margin-top: 26px; }
+.hero-arrow { width: 42px; height: 42px; display: grid; place-items: center; background: var(--ink); color: #fff; border: 2px solid var(--ink-3); font-family: var(--font-d); font-size: 16px; cursor: pointer; transition: background .2s, border-color .2s, color .2s; }
+.hero-arrow:hover { background: var(--slide-accent); color: var(--ink); border-color: var(--slide-accent); }
+.hero-dots { display: flex; gap: 8px; }
+.hero-dot { width: 28px; height: 4px; background: var(--ink-3); border: 0; padding: 0; cursor: pointer; transition: background .25s, width .25s; }
+.hero-dot.is-active { background: var(--slide-accent); width: 46px; }
+
+.hero-slider { position: relative; width: 100%; aspect-ratio: 4/3; overflow: hidden; background: #0a0f1e; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; transform: scale(1.04); transition: opacity .8s ease, transform 1s ease; pointer-events: none; }
+.hero-slide.is-active { opacity: 1; transform: scale(1); pointer-events: auto; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-slide__label { position: absolute; left: 16px; bottom: 16px; padding: 8px 12px 9px; background: rgba(10,15,30,.84); border-left: 3px solid var(--slide-accent); display: flex; flex-direction: column; gap: 2px; max-width: 72%; transition: border-color .7s; }
+.hero-slide__code { font-family: var(--font-n); font-weight: 800; font-size: 10px; letter-spacing: 2px; color: var(--slide-accent); transition: color .7s; }
+.hero-slide__name { font-family: var(--font-d); font-size: 15px; color: #fff; letter-spacing: -.3px; }
+.hero-slide__tag  { font-family: var(--font-n); font-weight: 700; font-size: 9px; letter-spacing: 1.4px; color: var(--steel); }
+
+@media (max-width: 720px) {
+  .hero-controls { gap: 10px; margin-top: 18px; }
+  .hero-arrow { width: 36px; height: 36px; font-size: 14px; }
+  .hero-dot { width: 22px; }
+  .hero-dot.is-active { width: 38px; }
+  .hero-slide__label { left: 10px; bottom: 10px; padding: 6px 10px; max-width: 80%; }
+  .hero-slide__name { font-size: 13px; }
+  .hero-set { margin: 16px 0 14px; }
+  .hero-set__name { font-size: 16px; }
+}
+
+/* ========== TILE IMAGE FILLS ========== */
+.feat__visual, .hot-card__visual, .more-tile__visual, .j-mini, .hot-main__visual { overflow: hidden; background: #0a0f1e; }
+.feat__visual img, .hot-card__visual img, .more-tile__visual img, .j-mini img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hot-main__visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.why-visual { position: relative; overflow: hidden; }
+.why-visual img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.why-visual__tag { position: absolute; left: 20px; bottom: 20px; padding: 8px 12px; background: var(--ink); color: #fff; font-family: var(--font-n); font-weight: 800; font-size: 11px; letter-spacing: 2.2px; border-left: 3px solid var(--cobalt); }
+.why-visual__tag b { color: var(--volt-teal); }
+
+.j-banner__image { position: relative; overflow: hidden; }
+.j-banner__image img { width: 100%; height: 100%; object-fit: cover; display: block; border: 3px solid var(--ink); }
+
+/* Reduced motion: kill hero slider transitions, but allow manual changes */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide { transition: opacity .01ms !important; }
+  .hero::before, .hero .hero-title em, .hero-eyebrow .pip, .hero-set, .hero-set__code, .hero-slide__label, .hero-slide__code { transition: none !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- ============================= HEADER ============================= -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="#" class="brand" aria-label="CardBai home">
+      <span class="brand-mark">CB</span>
+      <span class="brand-name">CARD<b>BAI</b></span>
+    </a>
+    <nav class="card-tab-nav" aria-label="Primary">
+      <button class="card-tab is-active" data-set="cobalt">HOME</button>
+      <button class="card-tab" data-set="teal">POKÉMON</button>
+      <button class="card-tab" data-set="orange">BOXES</button>
+      <button class="card-tab" data-set="magenta">PACKS</button>
+      <button class="card-tab" data-set="violet">SETS</button>
+      <button class="card-tab">SUPPORT</button>
+    </nav>
+    <div class="header-utils">
+      <button class="util-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M21 21l-5-5"/></svg>
+      </button>
+      <button class="util-btn util-btn--cart" id="cartBtn" aria-label="Cart">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 4h3l2.5 12.5h11l2-9H6"/><circle cx="9" cy="20" r="1.6"/><circle cx="18" cy="20" r="1.6"/></svg>
+        <span class="badge" id="cartCount">0</span>
+      </button>
+      <button class="util-btn mobile-menu-btn" aria-label="Menu" id="mdTrigger">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================= 1. HERO ============================= -->
+<!-- ============================= 1. HERO (3-SLIDE SLIDER) ============================= -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div data-reveal="left">
+        <div class="hero-eyebrow"><span class="pip">★</span> CARDBAI · ESTABLISHED 2024 · TCG RETAIL</div>
+        <h1 class="hero-title">Cards that<br>come <em>alive.</em></h1>
+        <p class="hero-sub">Authentic Pokémon trading cards, sourced direct from sealed cases and shipped factory-fresh to your door across the US. Independent retail — no fluff, just packs.</p>
+        <div class="hero-set">
+          <div class="hero-set__code">FEATURED SET · <span data-slide-code>M6</span></div>
+          <div class="hero-set__name"><span data-slide-name>Storm Emeralda</span> <em>· Japanese Booster Box</em></div>
+        </div>
+        <div class="hero-cta">
+          <a href="#hot" class="btn btn--accent"><span data-slide-cta>Shop M6 Storm Emeralda</span> <span class="arr">→</span></a>
+          <a href="#why" class="btn btn--ghost">Why CardBai?</a>
+        </div>
+        <div class="hero-controls">
+          <button class="hero-arrow" data-hero-prev aria-label="Previous slide">←</button>
+          <div class="hero-dots" role="tablist">
+            <button class="hero-dot is-active" data-hero-dot="0" aria-label="Slide 1: M6"></button>
+            <button class="hero-dot" data-hero-dot="1" aria-label="Slide 2: M1L"></button>
+            <button class="hero-dot" data-hero-dot="2" aria-label="Slide 3: M1S"></button>
+          </div>
+          <button class="hero-arrow" data-hero-next aria-label="Next slide">→</button>
+        </div>
+      </div>
+      <div class="hero-visual" data-reveal="right">
+        <div class="hero-visual__frame">
+          <div class="hero-slider" data-hero-slider>
+            <div class="hero-slide is-active" data-slide="0">
+              <img src="assets/final-visual-fill/hero-m6.png" alt="M6 Storm Emeralda booster box">
+              <div class="hero-slide__label">
+                <span class="hero-slide__code">M6</span>
+                <span class="hero-slide__name">STORM EMERALDA</span>
+                <span class="hero-slide__tag">JAPANESE · 25 BOXES IN STOCK</span>
+              </div>
+            </div>
+            <div class="hero-slide" data-slide="1">
+              <img src="assets/final-visual-fill/hero-m1l.png" alt="M1L Mega Brave booster box">
+              <div class="hero-slide__label">
+                <span class="hero-slide__code">M1L</span>
+                <span class="hero-slide__name">MEGA BRAVE</span>
+                <span class="hero-slide__tag">JAPANESE · 610 PACKS IN STOCK</span>
+              </div>
+            </div>
+            <div class="hero-slide" data-slide="2">
+              <img src="assets/final-visual-fill/hero-m1s.png" alt="M1S Mega Symphonia booster box">
+              <div class="hero-slide__label">
+                <span class="hero-slide__code">M1S</span>
+                <span class="hero-slide__name">MEGA SYMPHONIA</span>
+                <span class="hero-slide__tag">JAPANESE · 200 PACKS IN STOCK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-trust">
+    <div class="hero-trust__cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M12 3v18M3 7l9 4 9-4"/></svg>
+      US-WIDE SHIPPING
+    </div>
+    <div class="hero-trust__cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+      FACTORY SEALED
+    </div>
+    <div class="hero-trust__cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+      100% AUTHENTIC
+    </div>
+    <div class="hero-trust__cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5v14"/></svg>
+      IN STOCK NOW
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 2. CARDBAI SHOPPING STRIP ============================= -->
+<!-- ============================= 2. CARDBAI SHOPPING STRIP ============================= -->
+<section class="strip">
+  <div class="container">
+    <div class="strip-head">
+      <div class="eyebrow" style="justify-content:center">CardBai Shopping Strip</div>
+      <h2 class="section-title">Pick your <em>path</em>.</h2>
+      <p class="section-sub" style="margin:8px auto 0">Three quick doors into the catalogue — Japanese imports, factory-sealed cases, and what's hot right now.</p>
+    </div>
+    <div class="strip-grid" data-reveal-stagger>
+      <a href="#cat" class="strip-card" style="--sc-color:#1B40E0">
+        <div>
+          <div class="strip-card__eyebrow">Door 01 · Japanese Imports</div>
+          <div class="strip-card__title">Japanese<br>Pokémon TCG</div>
+          <div class="strip-card__copy">M1L, M1S, M6 and SV8A — official Japanese booster boxes and packs, factory sealed.</div>
+        </div>
+        <span class="strip-card__cta">Browse Japanese →</span>
+      </a>
+      <a href="#std" class="strip-card" style="--sc-color:#00D9C0">
+        <div>
+          <div class="strip-card__eyebrow">Door 02 · Sealed</div>
+          <div class="strip-card__title">Factory<br>Sealed Cases</div>
+          <div class="strip-card__copy">Every box we ship is shrink-wrapped, case-fresh, and verified before it goes out.</div>
+        </div>
+        <span class="strip-card__cta">See our standards →</span>
+      </a>
+      <a href="#hot" class="strip-card" style="--sc-color:#FF4D00">
+        <div>
+          <div class="strip-card__eyebrow">Door 03 · Hot</div>
+          <div class="strip-card__title">In Stock<br>Right Now</div>
+          <div class="strip-card__copy">1,400+ packs across 5 SKUs available today. No preorders, no dropship delays.</div>
+        </div>
+        <span class="strip-card__cta">Shop what's live →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 3. PRODUCT CATEGORY ============================= -->
+<section class="section section--white" id="cat">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">Product Category</div>
+        <h2 class="section-title">Find your <em>format.</em></h2>
+      </div>
+      <div class="head-block__side">04 / Format &nbsp;·&nbsp; 05 Launch SKUs</div>
+    </div>
+    <div class="cat-grid" data-reveal-stagger>
+      <a href="#hot" class="cat-card" style="--cat-color:#1B40E0">
+        <div class="cat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="6" width="18" height="14"/><path d="M3 10h18M8 14h2M14 14h2"/></svg>
+        </div>
+        <div class="cat-card__title">Booster Boxes</div>
+        <div class="cat-card__sub">Case-fresh sealed boxes. Best value per pack. 2 SKUs in stock.</div>
+        <div class="cat-card__count">2 SKUs</div>
+      </a>
+      <a href="#feat" class="cat-card" style="--cat-color:#FF007F">
+        <div class="cat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 4h14v16H5z"/><path d="M5 9h14M9 4v16"/></svg>
+        </div>
+        <div class="cat-card__title">Booster Packs</div>
+        <div class="cat-card__sub">Single packs from current sets. Japanese imports only.</div>
+        <div class="cat-card__count">3 SKUs</div>
+      </a>
+      <a href="#j-banner" class="cat-card" style="--cat-color:#00D9C0">
+        <div class="cat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a14 14 0 0 1 0 20M12 2a14 14 0 0 0 0 20"/></svg>
+        </div>
+        <div class="cat-card__title">Japanese TCG</div>
+        <div class="cat-card__sub">M-Series and SV. Direct from Japanese distributors.</div>
+        <div class="cat-card__count">All SKUs</div>
+      </a>
+      <a href="#future" class="cat-card" style="--cat-color:#7B2CFF">
+        <div class="cat-card__icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/></svg>
+        </div>
+        <div class="cat-card__title">Sealed &amp; Sleeved</div>
+        <div class="cat-card__sub">Sleeved, top-loaded, and ready for the binder. Our shipping standard.</div>
+        <div class="cat-card__count">Standard</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 4. WHY SHOP CARDBAI ============================= -->
+<section class="section section--ink" id="why">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">Why Shop CardBai</div>
+        <h2 class="section-title">Built for <em>collectors.</em></h2>
+      </div>
+      <div class="head-block__side">06 / Why us</div>
+    </div>
+    <div class="why-grid">
+      <div class="why-list" data-reveal-stagger>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">100% Authentic</div>
+            <div class="why-item__copy">Direct from Japanese distributors and US wholesalers. Every box verifiable to source.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l9 4v6c0 5-3.5 9-9 10-5.5-1-9-5-9-10V6l9-4z"/><path d="M9 12l2 2 4-4"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">Factory Sealed</div>
+            <div class="why-item__copy">Shrink-wrapped and case-fresh. We do not repack, reseal, or back-fill stock.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12h13l-4-4M21 12H8l4 4"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">Fast US Shipping</div>
+            <div class="why-item__copy">48-hour handling from our US warehouse. Tracked, insured, sleeved on arrival.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 12l9 4 9-4M3 17l9 4 9-4"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">Wholesale Direct</div>
+            <div class="why-item__copy">No middlemen, no dropship fees. Real prices for real collectors and resellers.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">TCG Market Experts</div>
+            <div class="why-item__copy">Live on the TCG market daily. We know which sets are moving and which are stacked.</div>
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-item__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div>
+            <div class="why-item__title">Global Collector Network</div>
+            <div class="why-item__copy">Trades, group buys, and direct-from-Japan sourcing for our repeat customer base.</div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual" data-reveal="right">
+        <img src="assets/final-visual-fill/why-shop.png" alt="CardBai collector products — sealed boxes and packs">
+        <div class="why-visual__tag"><b>CB</b> · TCG RETAIL</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 5. ABOUT CARDBAI / POKEMON GAME ZONE ============================= -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about-card" data-reveal="rise">
+      <div class="about-card__eyebrow">About CardBai · Pokémon Game Zone</div>
+      <h2 class="about-card__title">Independent retail for the new wave of Pokémon collectors.</h2>
+      <p class="about-card__copy">
+        CardBai is a US-based independent retailer specializing in authentic Japanese &amp; global Pokémon TCG. We source directly, verify every box, and ship factory-sealed across the country — no drop-shippers, no repacks, no surprises. Whether you're cracking your first pack or building a sealed-collection portfolio, we keep the path short and the inventory honest.
+      </p>
+      <div class="about-grid">
+        <div class="about-stat">
+          <div class="about-stat__num">5</div>
+          <div class="about-stat__lbl">Launch SKUs live</div>
+          <div class="about-stat__desc">All sourced, verified, and listed today — no preorders.</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat__num">1,400+</div>
+          <div class="about-stat__lbl">Packs in stock</div>
+          <div class="about-stat__desc">Across booster boxes and single packs, ready for immediate ship.</div>
+        </div>
+        <div class="about-stat">
+          <div class="about-stat__num">48<span style="font-size:.6em">hr</span></div>
+          <div class="about-stat__lbl">US handling time</div>
+          <div class="about-stat__desc">Tracked, insured, sleeved. We treat your packs like our own.</div>
+        </div>
+      </div>
+      <div class="about-cta">
+        <a href="#hot" class="btn btn--accent">Shop what's live <span class="arr">→</span></a>
+        <a href="#why" class="btn btn--ghost">Read our standards</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 6. COLLECTOR STANDARDS ============================= -->
+<section class="section section--white" id="std">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">Collector Standards</div>
+        <h2 class="section-title">Six standards. <em>Zero</em> shortcuts.</h2>
+      </div>
+      <div class="head-block__side">06 / Standards</div>
+    </div>
+    <div class="std-grid" data-reveal-stagger>
+      <div class="std" style="--std-color:#1B40E0">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="6" width="18" height="14"/><path d="M3 10h18"/></svg></div>
+        <div class="std__num">01</div>
+        <div class="std__title">Factory Sealed at Source</div>
+        <div class="std__copy">Every box ships in its original shrink wrap from the distributor. No repacks, no reseals — verified on intake.</div>
+      </div>
+      <div class="std" style="--std-color:#00D9C0">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="std__num">02</div>
+        <div class="std__title">Authenticated Provenance</div>
+        <div class="std__copy">Tracked to a known Japanese or US distributor. Receipts and supplier records kept on every SKU.</div>
+      </div>
+      <div class="std" style="--std-color:#FF4D00">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg></div>
+        <div class="std__num">03</div>
+        <div class="std__title">Collector-Tested Handling</div>
+        <div class="std__copy">Boxes are corner-padded and sleeved before they leave our dock. No crushed corners in transit.</div>
+      </div>
+      <div class="std" style="--std-color:#FF007F">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="3" y="3" width="18" height="18"/><path d="M3 9h18M9 3v18"/></svg></div>
+        <div class="std__num">04</div>
+        <div class="std__title">Tracked &amp; Insured Shipping</div>
+        <div class="std__copy">Every order leaves with full tracking and insurance. Lost-in-transit claims resolved by us.</div>
+      </div>
+      <div class="std" style="--std-color:#7B2CFF">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M21 12a9 9 0 1 1-9-9"/><path d="M21 3v6h-6"/></svg></div>
+        <div class="std__num">05</div>
+        <div class="std__title">Live Stock Visibility</div>
+        <div class="std__copy">What you see is what we have on the shelf today. We don't list what we don't own.</div>
+      </div>
+      <div class="std" style="--std-color:#1B40E0">
+        <div class="std__seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M3 12h6l3-9 3 18 3-9h3"/></svg></div>
+        <div class="std__num">06</div>
+        <div class="std__title">Real TCG Market Sense</div>
+        <div class="std__copy">We follow TCGPlayer, eBay, and the Japanese secondary daily. Pricing is benchmarked, not aspirational.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 7. IN-STOCK PICKS / HOT PRODUCTS ============================= -->
+<section class="section section--paper" id="hot">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">In-Stock Picks · Hot Products</div>
+        <h2 class="section-title">What collectors are <em>cracking</em> this week.</h2>
+      </div>
+      <div class="head-block__side">07 / Picks &nbsp;·&nbsp; Editor's selection</div>
+    </div>
+    <div class="hot-grid" data-reveal-stagger>
+      <!-- Featured: M6 Box -->
+      <div class="hot-main" data-product="m6-box">
+        <div class="hot-main__eyebrow">Featured &nbsp;·&nbsp; M6 &nbsp;·&nbsp; Box</div>
+        <div class="hot-main__name">Storm Emeralda<br><em>Booster Box.</em></div>
+        <div class="hot-main__copy">The freshest Japanese set in the M-Series. 5 packs per box, 5 cards per pack. Sleeved on intake, sleeved on ship.</div>
+        <div class="hot-main__visual">
+          <img src="assets/final-visual-fill/hot-large.png" alt="M6 Storm Emeralda Booster Pack — CardBai Featured">
+        </div>
+        <div class="hot-main__meta">
+          <div class="hot-main__meta-row">
+            <span class="lbl">Stock</span>
+            <span class="val">25 boxes</span>
+          </div>
+          <div class="hot-main__meta-row">
+            <span class="lbl">Format</span>
+            <span class="val">Box · 30 packs</span>
+          </div>
+        </div>
+        <div class="hot-main__cta">
+          <button class="btn btn--accent js-product-card__cta">Add to cart <span class="arr">→</span></button>
+        </div>
+      </div>
+      <!-- 4 small hot cards -->
+      <div class="hot-side">
+        <div class="hot-card" data-product="m6-pack" style="--hc-color:#00D9C0">
+          <div class="hot-card__bar"></div>
+          <div class="hot-card__code">M6 · Pack</div>
+          <div class="hot-card__name">Storm Emeralda Booster Pack</div>
+          <div class="hot-card__visual">
+            <img src="assets/final-visual-fill/hot-m6-pack.svg" alt="M6 Storm Emeralda Booster Pack">
+          </div>
+          <div class="hot-card__price">Price TBD</div>
+          <div class="hot-card__stock">In stock · 566</div>
+        </div>
+        <div class="hot-card" data-product="m1l-pack" style="--hc-color:#FF4D00">
+          <div class="hot-card__bar"></div>
+          <div class="hot-card__code">M1L · Pack</div>
+          <div class="hot-card__name">Mega Brave Booster Pack</div>
+          <div class="hot-card__visual">
+            <img src="assets/final-visual-fill/hot-m1l-pack.svg" alt="M1L Mega Brave Booster Pack">
+          </div>
+          <div class="hot-card__price">Price TBD</div>
+          <div class="hot-card__stock">In stock · 610</div>
+        </div>
+        <div class="hot-card" data-product="m1s-pack" style="--hc-color:#FF007F">
+          <div class="hot-card__bar"></div>
+          <div class="hot-card__code">M1S · Pack</div>
+          <div class="hot-card__name">Mega Symphonia Booster Pack</div>
+          <div class="hot-card__visual">
+            <img src="assets/final-visual-fill/hot-m1s-pack.svg" alt="M1S Mega Symphonia Booster Pack">
+          </div>
+          <div class="hot-card__price">Price TBD</div>
+          <div class="hot-card__stock">In stock · 200</div>
+        </div>
+        <div class="hot-card" data-product="sv8a-box" style="--hc-color:#7B2CFF">
+          <div class="hot-card__bar"></div>
+          <div class="hot-card__code">SV8A · Box</div>
+          <div class="hot-card__name">Terastal Festival ex Booster Box</div>
+          <div class="hot-card__visual">
+            <img src="assets/final-visual-fill/hot-sv8a-box.svg" alt="SV8A Terastal Festival ex Booster Box">
+          </div>
+          <div class="hot-card__price">Price TBD</div>
+          <div class="hot-card__stock hot-card__stock--low">Only 1 left</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 8. JAPANESE LARGE DIAGONAL BANNER ============================= -->
+<section class="j-banner" id="j-banner">
+  <div class="container j-inner">
+    <div class="j-text" data-reveal="left">
+      <div class="eyebrow">Edition Highlight</div>
+      <h2 class="j-title">
+        <span>Japanese</span>
+        <span><em>Pokémon TCG.</em></span>
+      </h2>
+      <p class="j-copy">The real-deal Japanese sealed product line — M-Series and SV, sourced direct and shipped factory-fresh. The cleanest path to cards you can't find at retail in the US.</p>
+      <a href="#feat" class="btn btn--accent">View all Japanese TCG <span class="arr">→</span></a>
+    </div>
+    <div class="j-banner__image" data-reveal="right">
+      <img src="assets/final-visual-fill/jp-banner.png" alt="Japanese Pokémon TCG booster boxes — M6, M1L, SV8A">
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 9. FEATURED SET (8-tile grid) ============================= -->
+<section class="section section--paper" id="feat">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">Featured Set</div>
+        <h2 class="section-title">Every launch <em>SKU.</em></h2>
+      </div>
+      <div class="head-block__side">09 / Grid &nbsp;·&nbsp; 8 tiles</div>
+    </div>
+    <div class="feat-grid" data-reveal-stagger>
+      <div class="feat" data-product="m6-box" style="--f-color:#00D9C0">
+        <div class="feat__code">M6 · Box</div>
+        <div class="feat__name">Storm Emeralda Booster Box</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m6-box.svg" alt="M6 Storm Emeralda Booster Box"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">1 box</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m6-pack" style="--f-color:#00D9C0">
+        <div class="feat__code">M6 · Pack</div>
+        <div class="feat__name">Storm Emeralda Booster Pack</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m6-pack.svg" alt="M6 Storm Emeralda Booster Pack"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">1 pack</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m1l-pack" style="--f-color:#FF4D00">
+        <div class="feat__code">M1L · Pack</div>
+        <div class="feat__name">Mega Brave Booster Pack</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m1l-pack.svg" alt="M1L Mega Brave Booster Pack"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">1 pack</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m1s-pack" style="--f-color:#FF007F">
+        <div class="feat__code">M1S · Pack</div>
+        <div class="feat__name">Mega Symphonia Booster Pack</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m1s-pack.svg" alt="M1S Mega Symphonia Booster Pack"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">1 pack</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="sv8a-box" style="--f-color:#7B2CFF">
+        <div class="feat__code">SV8A · Box</div>
+        <div class="feat__name">Terastal Festival ex Booster Box</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-sv8a-box.svg" alt="SV8A Terastal Festival ex Booster Box"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">1 box</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m6-pack" style="--f-color:#00D9C0">
+        <div class="feat__code">M6 · Pack · x6</div>
+        <div class="feat__name">Storm Emeralda · 6-Pack Bundle</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m6-6x.svg" alt="M6 Storm Emeralda 6-Pack Bundle"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">6 packs</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m1l-pack" style="--f-color:#FF4D00">
+        <div class="feat__code">M1L · Pack · x10</div>
+        <div class="feat__name">Mega Brave · 10-Pack Bundle</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m1l-10x.svg" alt="M1L Mega Brave 10-Pack Bundle"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">10 packs</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+      <div class="feat" data-product="m1s-pack" style="--f-color:#FF007F">
+        <div class="feat__code">M1S · Pack · x10</div>
+        <div class="feat__name">Mega Symphonia · 10-Pack Bundle</div>
+        <div class="feat__visual"><img src="assets/final-visual-fill/feat-m1s-10x.svg" alt="M1S Mega Symphonia 10-Pack Bundle"></div>
+        <div class="feat__price-row"><div class="feat__price">US$ TBD</div><div class="feat__moq">10 packs</div></div>
+        <button class="feat__cta js-product-card__cta">Add to cart</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 10. MORE SETS ============================= -->
+<section class="section section--white">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">More Sets</div>
+        <h2 class="section-title">More <em>ways</em> to play.</h2>
+      </div>
+      <div class="head-block__side">10 / More &nbsp;·&nbsp; 4 picks</div>
+    </div>
+    <div class="more-grid" data-reveal-stagger>
+      <div class="more-tile" data-product="m6-box">
+        <div class="more-tile__visual"><img src="assets/final-visual-fill/more-m6-box.svg" alt="M6 Storm Emeralda Full Case"></div>
+        <div class="more-tile__meta">
+          <div class="more-tile__name">M6 Storm Emeralda · Full Case (12 Boxes)</div>
+          <div class="more-tile__sub">For resellers and serious binders. 12 sealed boxes, one shipment.</div>
+          <div class="more-tile__price">US$ TBD</div>
+          <div class="more-tile__cta-row">
+            <button class="feat__cta js-product-card__cta" style="margin:0;flex:1">Add to cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="more-tile" data-product="sv8a-box">
+        <div class="more-tile__visual"><img src="assets/final-visual-fill/more-sv8a-box.svg" alt="SV8A Terastal Festival ex Last Box"></div>
+        <div class="more-tile__meta">
+          <div class="more-tile__name">SV8A Terastal Festival ex · The Last Box</div>
+          <div class="more-tile__sub">Only 1 in stock. When it's gone, it's gone — no restock planned.</div>
+          <div class="more-tile__price">US$ TBD</div>
+          <div class="more-tile__cta-row">
+            <button class="feat__cta js-product-card__cta" style="margin:0;flex:1">Add to cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="more-tile" data-product="m1l-pack">
+        <div class="more-tile__visual"><img src="assets/final-visual-fill/more-m1l-pack.svg" alt="M1L Mega Brave Display Tray"></div>
+        <div class="more-tile__meta">
+          <div class="more-tile__name">M1L Mega Brave · Display Tray (30 Packs)</div>
+          <div class="more-tile__sub">Tray-fresh. The cleanest single-set crack for collectors.</div>
+          <div class="more-tile__price">US$ TBD</div>
+          <div class="more-tile__cta-row">
+            <button class="feat__cta js-product-card__cta" style="margin:0;flex:1">Add to cart</button>
+          </div>
+        </div>
+      </div>
+      <div class="more-tile" data-product="m1s-pack">
+        <div class="more-tile__visual"><img src="assets/final-visual-fill/more-m1s-pack.svg" alt="M1S Mega Symphonia Display Tray"></div>
+        <div class="more-tile__meta">
+          <div class="more-tile__name">M1S Mega Symphonia · Display Tray (30 Packs)</div>
+          <div class="more-tile__sub">Pairs cleanly with M1L for collectors building the M-Series.</div>
+          <div class="more-tile__price">US$ TBD</div>
+          <div class="more-tile__cta-row">
+            <button class="feat__cta js-product-card__cta" style="margin:0;flex:1">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 11. FUTURE CARDS ZONE (PLACEHOLDER) ============================= -->
+<section class="section future" id="future">
+  <div class="container">
+    <div class="future-inner">
+      <div data-reveal="left">
+        <div class="eyebrow">Future Cards Zone</div>
+        <h2 class="future-title">Coming <em>soon</em> to the shelf.</h2>
+        <p class="future-copy">Sets we're tracking for sourcing. Join the waitlist — when we land allocation, our list gets first crack. No spam, just a single ping per drop.</p>
+        <div class="future-list">
+          <div class="future-row">
+            <div class="future-row__code">M2A</div>
+            <div>
+              <div class="future-row__name">Mega Dream Ex</div>
+              <div class="future-row__sub">Japanese M-Series · Allocation pending</div>
+            </div>
+            <div class="future-row__tag">Waitlist</div>
+          </div>
+          <div class="future-row">
+            <div class="future-row__code">M4</div>
+            <div>
+              <div class="future-row__name">Ninja Spinner</div>
+              <div class="future-row__sub">Japanese M-Series · Q1 next year</div>
+            </div>
+            <div class="future-row__tag">Waitlist</div>
+          </div>
+          <div class="future-row">
+            <div class="future-row__code">M5</div>
+            <div>
+              <div class="future-row__name">Abyss Eye</div>
+              <div class="future-row__sub">Japanese M-Series · Distribution contact</div>
+            </div>
+            <div class="future-row__tag">Waitlist</div>
+          </div>
+          <div class="future-row">
+            <div class="future-row__code">SV9</div>
+            <div>
+              <div class="future-row__name">SV Series · Next Block</div>
+              <div class="future-row__sub">English &amp; Japanese · TBD</div>
+            </div>
+            <div class="future-row__tag">Waitlist</div>
+          </div>
+        </div>
+        <div class="future-cta">
+          <a href="#" class="btn btn--accent">Join the waitlist <span class="arr">→</span></a>
+          <a href="#buy" class="btn btn--ghost">Buying info</a>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <div style="aspect-ratio:4/5;background:rgba(0,0,0,.35);border:3px solid #fff;display:grid;place-items:center;position:relative;">
+          <div style="position:absolute;top:8px;left:8px;width:22px;height:22px;background:var(--volt-teal);"></div>
+          <div style="position:absolute;bottom:8px;right:8px;width:22px;height:22px;background:var(--blaze-orange);"></div>
+          <div style="text-align:center;color:#fff;">
+            <div style="font-family:var(--font-n);font-weight:700;font-size:12px;letter-spacing:2.4px;color:var(--volt-teal);margin-bottom:12px;">Q1 · Q2 · Q3 NEXT YEAR</div>
+            <div style="font-family:var(--font-d);font-size:clamp(40px,6vw,68px);line-height:.95;">SETS<br>IN&nbsp;<span style="color:var(--volt-teal)">WAITLIST</span></div>
+            <div style="font-family:var(--font-n);font-weight:700;font-size:13px;letter-spacing:1.4px;color:var(--slate-2);margin-top:14px;">04 ACTIVE · NO SPAM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 12. BUYING INFO / FAQ ============================= -->
+<section class="section section--paper" id="buy">
+  <div class="container">
+    <div class="head-block">
+      <div class="head-block__title-block">
+        <div class="eyebrow">Buying Info</div>
+        <h2 class="section-title">Before you <em>check out.</em></h2>
+      </div>
+      <div class="head-block__side">12 / Info &nbsp;·&nbsp; 06 Q&amp;A</div>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-list" data-reveal-stagger>
+        <div class="faq">
+          <button class="faq__q" type="button">Do you ship internationally? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">Currently US-only. We ship to all 50 states via USPS / UPS tracked. International is on the roadmap — join the waitlist if you want first notice.</div></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q" type="button">How do you verify authenticity? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">Every box is sourced from known Japanese distributors or US wholesalers. We keep supplier records per SKU. Sealed product is sold sealed; we don't repack or reseal.</div></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q" type="button">What's your returns policy? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">Sealed product is final sale — we can't accept returns on opened or tampered packs. If your order arrives damaged or incorrect, contact us within 48 hours and we make it right.</div></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q" type="button">Do you offer wholesale or bulk pricing? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">Yes — full-case orders (12 boxes) and Display Trays (30 packs) get our wholesale-direct pricing. For larger volumes, message us directly for a quote.</div></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q" type="button">When do you restock sold-out SKUs? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">We restock on allocation, not on schedule. Use the Future Cards Zone waitlist to get pinged when a SKU is back in stock. No dropship delays.</div></div></div>
+        </div>
+        <div class="faq">
+          <button class="faq__q" type="button">How long until my order ships? <span class="chev">+</span></button>
+          <div class="faq__a"><div class="faq__a-inner"><div class="faq__a-body">48-hour handling from our US warehouse. Standard shipping 3–5 business days, expedited 1–2. Every order is tracked and insured.</div></div></div>
+        </div>
+      </div>
+      <aside class="buy-aside">
+        <div class="buy-aside__eyebrow">Ready to ship</div>
+        <div class="buy-aside__title">Order today.<br>Pack tomorrow.</div>
+        <div class="buy-aside__copy">Skip the back-and-forth. Pick your SKU, check out, and your packs ship within 48 hours from our US warehouse.</div>
+        <div class="buy-aside__list">
+          <div class="buy-aside__row">48-hour handling</div>
+          <div class="buy-aside__row">Tracked &amp; insured</div>
+          <div class="buy-aside__row">Sleeved on ship</div>
+          <div class="buy-aside__row">US-only for now</div>
+        </div>
+        <a href="#hot" class="btn btn--accent" style="width:100%">Shop what's live <span class="arr">→</span></a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================= 13. FOOTER ============================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand">
+          <span class="brand-mark">CB</span>
+          <span class="brand-name">CARD<b>BAI</b></span>
+        </a>
+        <p>Independent US retailer for authentic Japanese &amp; global Pokémon TCG. Factory sealed, US shipped, collector priced.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#cat">Booster Boxes</a></li>
+          <li><a href="#cat">Booster Packs</a></li>
+          <li><a href="#j-banner">Japanese TCG</a></li>
+          <li><a href="#feat">All SKUs</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sets</h4>
+        <ul>
+          <li><a href="#hot">M6 · Storm Emeralda</a></li>
+          <li><a href="#hot">M1L · Mega Brave</a></li>
+          <li><a href="#hot">M1S · Mega Symphonia</a></li>
+          <li><a href="#hot">SV8A · Terastal Festival</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#buy">Buying Info</a></li>
+          <li><a href="#why">Why CardBai</a></li>
+          <li><a href="#std">Collector Standards</a></li>
+          <li><a href="#future">Future Drops</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 CardBai · Independent TCG Retail · US warehouse</div>
+      <div>5 Launch SKUs · Factory sealed · Tracked shipping</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================= QUICK VIEW DRAWER ============================= -->
+<div class="qv-overlay" id="qvOverlay"></div>
+<aside class="qv-drawer" id="qvDrawer" aria-hidden="true">
+  <div class="qv-head">
+    <div class="qv-head__brand">CARD<b>BAI</b></div>
+    <button class="qv-close" id="qvClose" aria-label="Close quick view">✕</button>
+  </div>
+  <div class="qv-body">
+    <div class="qv-visual" id="qvVisual"></div>
+    <div class="qv-code" id="qvCode"></div>
+    <div class="qv-name" id="qvName"></div>
+    <div class="qv-row"><span>Set</span><span id="qvSet"></span></div>
+    <div class="qv-row"><span>Language</span><span id="qvLang"></span></div>
+    <div class="qv-row"><span>Product type</span><span id="qvType"></span></div>
+    <div class="qv-row"><span>Stock</span><span id="qvStock"></span></div>
+    <div class="qv-row"><span>Price</span><span id="qvPrice"></span></div>
+  </div>
+  <div class="qv-cta">
+    <button class="btn btn--ink" id="qvAdd">Add to cart</button>
+    <a class="btn btn--ghost-light" href="#feat" id="qvView">View full product</a>
+  </div>
+</aside>
+
+<!-- ============================= MOBILE DRAWER ============================= -->
+<div class="md-overlay" id="mdOverlay"></div>
+<aside class="md-drawer" id="mdDrawer" aria-hidden="true">
+  <div class="md-head">
+    <div class="md-head__brand">CARD<b>BAI</b></div>
+    <button class="md-close" id="mdClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav class="md-body">
+    <a class="md-link" data-set="" href="#hero"><span>Home</span><span class="arr">→</span></a>
+    <a class="md-link" data-set="teal" href="#j-banner"><span>Pokémon</span><span class="arr">→</span></a>
+    <a class="md-link" data-set="orange" href="#cat"><span>Booster Boxes</span><span class="arr">→</span></a>
+    <a class="md-link" data-set="magenta" href="#feat"><span>Booster Packs</span><span class="arr">→</span></a>
+    <a class="md-link" data-set="violet" href="#future"><span>Sets</span><span class="arr">→</span></a>
+    <a class="md-link" data-set="" href="#buy"><span>Support</span><span class="arr">→</span></a>
+  </nav>
+  <div class="md-foot">Independent retailer · <b>5 Launch SKUs live</b></div>
+</aside>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ========== Reveal ========== */
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('is-revealed'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -80px 0px' });
+    document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach(function(el) { io.observe(el); });
+  } else {
+    document.querySelectorAll('[data-reveal], [data-reveal-stagger]').forEach(function(el) { el.classList.add('is-revealed'); });
+  }
+
+  /* ========== Navigation ========== */
+  var tabs = Array.from(document.querySelectorAll('.card-tab'));
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('is-active'); });
+      tab.classList.add('is-active');
+      var set = tab.dataset.set || '';
+      document.querySelectorAll('.md-link').forEach(function(l) {
+        l.classList.toggle('is-active', (l.dataset.set || '') === set && set !== '');
+      });
+    });
+  });
+
+  /* ========== Add to Cart ========== */
+  var cartCount = 0;
+  var cartCountEl = document.getElementById('cartCount');
+  function flashAdded(btn, label) {
+    var orig = label || 'Add to cart';
+    btn.textContent = 'Added ✓';
+    btn.classList.add('is-added');
+    setTimeout(function() {
+      btn.textContent = orig;
+      btn.classList.remove('is-added');
+    }, 1400);
+  }
+  function bumpCart() {
+    cartCount++;
+    cartCountEl.textContent = cartCount;
+    if (cartCountEl.animate) {
+      cartCountEl.animate(
+        [{ transform: 'scale(1)' }, { transform: 'scale(1.6)' }, { transform: 'scale(1)' }],
+        { duration: 320, easing: 'cubic-bezier(.2,.7,.2,1)' }
+      );
+    }
+  }
+  document.querySelectorAll('.js-product-card__cta').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      bumpCart();
+      flashAdded(btn, btn.dataset.origLabel || btn.textContent);
+      var card = btn.closest('.feat, .hot-card, .more-tile, .hot-main');
+      if (card && card.animate) {
+        card.animate(
+          [{ transform: 'translateX(0)' }, { transform: 'translateX(-4px)' }, { transform: 'translateX(4px)' }, { transform: 'translateX(0)' }],
+          { duration: 360, easing: 'ease-out' }
+        );
+      }
+    });
+  });
+
+  /* ========== FAQ Accordion ========== */
+  document.querySelectorAll('.faq__q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var f = q.closest('.faq');
+      var wasOpen = f.classList.contains('is-open');
+      document.querySelectorAll('.faq.is-open').forEach(function(x) { x.classList.remove('is-open'); });
+      if (!wasOpen) f.classList.add('is-open');
+    });
+  });
+
+  /* ========== Quick View ========== */
+  var products = {
+    'm6-box':   { code: 'M6   ·   BOX',     name: 'Storm Emeralda Booster Box',         set: 'M6 · Storm Emeralda',       lang: 'Japanese',   type: 'Factory Sealed Booster Box', stock: 'In stock · 25',   price: 'Price TBD', color: '#00D9C0' },
+    'm6-pack':  { code: 'M6   ·   PACK',    name: 'Storm Emeralda Booster Pack',         set: 'M6 · Storm Emeralda',       lang: 'Japanese',   type: 'Officially Released Pack',    stock: 'In stock · 566',  price: 'Price TBD', color: '#00D9C0' },
+    'm1l-pack': { code: 'M1L   ·   PACK',   name: 'Mega Brave Booster Pack',             set: 'M1L · Mega Brave',          lang: 'Japanese',   type: 'Officially Released Pack',    stock: 'In stock · 610',  price: 'Price TBD', color: '#FF4D00' },
+    'm1s-pack': { code: 'M1S   ·   PACK',   name: 'Mega Symphonia Booster Pack',         set: 'M1S · Mega Symphonia',      lang: 'Japanese',   type: 'Officially Released Pack',    stock: 'In stock · 200',  price: 'Price TBD', color: '#FF007F' },
+    'sv8a-box': { code: 'SV8A   ·   BOX',   name: 'Terastal Festival ex Booster Box',    set: 'SV8A · Terastal Festival ex', lang: 'Japanese', type: 'Factory Sealed Booster Box', stock: 'Only 1 left',     price: 'Price TBD', color: '#7B2CFF' }
+  };
+  var qvDrawer = document.getElementById('qvDrawer');
+  var qvOverlay = document.getElementById('qvOverlay');
+  var qvClose = document.getElementById('qvClose');
+
+  function openQuickView(key) {
+    var p = products[key]; if (!p) return;
+    document.body.classList.add('is-modal-open');
+    qvDrawer.style.setProperty('--qv-color', p.color);
+    qvDrawer.classList.add('is-open');
+    qvOverlay.classList.add('is-open');
+    qvDrawer.setAttribute('aria-hidden', 'false');
+    document.getElementById('qvCode').textContent = p.code;
+    document.getElementById('qvName').textContent = p.name;
+    document.getElementById('qvSet').textContent = p.set;
+    document.getElementById('qvLang').textContent = p.lang;
+    document.getElementById('qvType').textContent = p.type;
+    var stockEl = document.getElementById('qvStock');
+    stockEl.textContent = p.stock;
+    stockEl.className = (p.stock.indexOf('Only') >= 0) ? 'status--amber' : 'status--green';
+    document.getElementById('qvPrice').textContent = p.price;
+    document.getElementById('qvVisual').innerHTML =
+      '<svg viewBox="0 0 280 360" preserveAspectRatio="xMidYMid meet">' +
+        '<rect width="280" height="360" fill="#fff"/>' +
+        '<rect width="280" height="56" fill="' + p.color + '"/>' +
+        '<text x="140" y="40" text-anchor="middle" font-family="Archivo Black" font-size="28" fill="#0A0F1E">' + p.code.split(' ')[0] + '</text>' +
+        '<text x="140" y="140" text-anchor="middle" font-family="Archivo Black" font-size="32" fill="#0A0F1E">' + (p.type.indexOf('Box') >= 0 ? 'BOX' : 'PACK') + '</text>' +
+        '<rect x="20" y="180" width="240" height="130" fill="#F5F7FA" stroke="#0A0F1E" stroke-width="1.5"/>' +
+        '<text x="140" y="226" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="14" fill="#5C6780" letter-spacing="2">JAPANESE</text>' +
+        '<text x="140" y="250" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="14" fill="#5C6780" letter-spacing="2">FACTORY SEALED</text>' +
+        '<rect y="320" width="280" height="40" fill="#0A0F1E"/>' +
+        '<text x="140" y="346" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="13" letter-spacing="3" fill="' + p.color + '">CARDBAI</text>' +
+      '</svg>';
+  }
+  function closeQuickView() {
+    document.body.classList.remove('is-modal-open');
+    qvDrawer.classList.remove('is-open');
+    qvOverlay.classList.remove('is-open');
+    qvDrawer.setAttribute('aria-hidden', 'true');
+  }
+  qvClose.addEventListener('click', closeQuickView);
+  qvOverlay.addEventListener('click', closeQuickView);
+
+  /* ========== Quick View: open on card click (not on CTA) ========== */
+  document.querySelectorAll('[data-product]').forEach(function(card) {
+    card.addEventListener('click', function(e) {
+      if (e.target.closest('.js-product-card__cta')) return;
+      e.preventDefault();
+      openQuickView(card.dataset.product);
+    });
+  });
+
+  /* ========== QV Add to Cart ========== */
+  document.getElementById('qvAdd').addEventListener('click', function() {
+    bumpCart();
+    var btn = document.getElementById('qvAdd');
+    btn.textContent = 'Added ✓';
+    btn.classList.add('btn--added');
+    setTimeout(function() { btn.textContent = 'Add to cart'; btn.classList.remove('btn--added'); }, 1600);
+  });
+
+  /* ========== Mobile Drawer (FULLY HARDENED) ========== */
+  var mdOverlay = document.getElementById('mdOverlay');
+  var mdDrawer  = document.getElementById('mdDrawer');
+  var mdClose   = document.getElementById('mdClose');
+  var mdTrigger = document.getElementById('mdTrigger');
+
+  function openMobileMenu() {
+    document.body.classList.add('is-modal-open');
+    mdOverlay.classList.add('is-open');
+    mdDrawer.classList.add('is-open');
+    mdDrawer.setAttribute('aria-hidden', 'false');
+  }
+  function closeMobileMenu() {
+    mdOverlay.classList.remove('is-open');
+    mdDrawer.classList.remove('is-open');
+    mdDrawer.setAttribute('aria-hidden', 'true');
+    if (!document.querySelector('.qv-drawer.is-open')) {
+      document.body.classList.remove('is-modal-open');
+    }
+  }
+  if (mdTrigger) mdTrigger.addEventListener('click', openMobileMenu);
+  if (mdClose) mdClose.addEventListener('click', closeMobileMenu);
+  if (mdOverlay) mdOverlay.addEventListener('click', closeMobileMenu);
+  document.querySelectorAll('.md-link').forEach(function(link) {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      var set = link.dataset.set;
+      tabs.forEach(function(t) { if ((t.dataset.set || '') === set) t.click(); });
+      document.querySelectorAll('.md-link').forEach(function(l) { l.classList.toggle('is-active', l === link); });
+      var href = link.getAttribute('href');
+      closeMobileMenu();
+      if (href && href.charAt(0) === '#') {
+        var target = document.querySelector(href);
+        if (target) {
+          setTimeout(function() { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 350);
+        }
+      }
+    });
+  });
+
+  /* ========== Esc closes both ========== */
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeQuickView();
+      closeMobileMenu();
+    }
+  });
+
+  /* ========== Resize: close drawer if switching to desktop ========== */
+  var resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function() {
+      if (window.innerWidth > 920) closeMobileMenu();
+    }, 120);
+  });
+
+  /* ========== Defensive: ensure drawer starts closed on load ========== */
+  closeMobileMenu();
+  closeQuickView();
+})();
+
+/* ========== HERO SLIDER ========== */
+(function(){
+  var hero = document.getElementById('hero');
+  if (!hero) return;
+  var slides = hero.querySelectorAll('.hero-slide');
+  var dots   = hero.querySelectorAll('[data-hero-dot]');
+  var prev   = hero.querySelector('[data-hero-prev]');
+  var next   = hero.querySelector('[data-hero-next]');
+  var codeEl = hero.querySelector('[data-slide-code]');
+  var nameEl = hero.querySelector('[data-slide-name]');
+  var ctaEl  = hero.querySelector('[data-slide-cta]');
+  var DATA = [
+    { code:'M6',  name:'Storm Emeralda',  cta:'Shop M6 Storm Emeralda',  accent:'#00D9C0', accent2:'#1B40E0' },
+    { code:'M1L', name:'Mega Brave',      cta:'Shop M1L Mega Brave',     accent:'#FF4D00', accent2:'#FF7A3A' },
+    { code:'M1S', name:'Mega Symphonia',  cta:'Shop M1S Mega Symphonia', accent:'#FF007F', accent2:'#FF5FA8' }
+  ];
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var idx = 0, timer = null;
+  function setText(el, val){
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(8px)';
+    setTimeout(function(){
+      el.textContent = val;
+      el.style.opacity = '1';
+      el.style.transform = 'none';
+    }, 220);
+  }
+  function go(n){
+    idx = (n + slides.length) % slides.length;
+    slides.forEach(function(s,i){ s.classList.toggle('is-active', i===idx); });
+    dots.forEach(function(d,i){ d.classList.toggle('is-active', i===idx); });
+    var a = DATA[idx];
+    /* Set accent transition — drives diagonal, em, pip, CTA, dot, slide label */
+    hero.style.setProperty('--slide-accent',  a.accent);
+    hero.style.setProperty('--slide-accent-2', a.accent2);
+    setText(codeEl, a.code);
+    setText(nameEl, a.name);
+    setText(ctaEl,  a.cta);
+  }
+  function start(){ if (reduced) return; stop(); timer = setInterval(function(){ go(idx+1); }, 9000); }
+  function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+  if (prev) prev.addEventListener('click', function(){ go(idx-1); start(); });
+  if (next) next.addEventListener('click', function(){ go(idx+1); start(); });
+  dots.forEach(function(d){ d.addEventListener('click', function(){ go(+d.dataset.heroDot); start(); }); });
+  hero.addEventListener('mouseenter', stop);
+  hero.addEventListener('mouseleave', start);
+  /* Swipe */
+  var sx = null;
+  hero.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+  hero.addEventListener('touchend', function(e){
+    if (sx == null) return;
+    var dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) { go(idx + (dx < 0 ? 1 : -1)); start(); }
+    sx = null;
+  }, {passive:true});
+  go(0);
+  start();
+})();
+
+</script>
+</body>
+</html>
