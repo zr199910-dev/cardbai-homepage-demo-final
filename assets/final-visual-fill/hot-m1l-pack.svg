@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 360">
+<defs>
+  <radialGradient id="bg-m1l" cx="0.5" cy="0.45" r="0.85">
+    <stop offset="0" stop-color="#1B2440"/><stop offset="1" stop-color="#0A0F1E"/>
+  </radialGradient>
+  <radialGradient id="rim-m1l" cx="0.5" cy="0.55" r="0.55">
+    <stop offset="0" stop-color="#FF4D00" stop-opacity="0.7"/>
+    <stop offset="1" stop-color="#FF4D00" stop-opacity="0"/>
+  </radialGradient>
+  <linearGradient id="foil-m1l" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.9"/>
+    <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.7"/>
+  </linearGradient>
+  <linearGradient id="floor-m1l" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#FF4D00" stop-opacity="0"/>
+    <stop offset="1" stop-color="#FF4D00" stop-opacity="0.18"/>
+  </linearGradient>
+</defs><rect width="260" height="360" fill="url(#bg-m1l)"/><ellipse cx="120.0" cy="164.0" rx="90" ry="130" fill="url(#rim-m1l)" opacity="0.45"/><polygon points="0,0 30,0 0,30" fill="#FF4D00"/><polygon points="88.0,44 98.66666666666667,44 93.33333333333333,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><polygon points="98.66666666666667,44 109.33333333333334,44 104.0,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><polygon points="109.33333333333333,44 120.0,44 114.66666666666666,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><polygon points="120.0,44 130.66666666666666,44 125.33333333333333,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><polygon points="130.66666666666666,44 141.33333333333331,44 136.0,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><polygon points="141.33333333333331,44 151.99999999999997,44 146.66666666666666,52 " fill="#0E1626" stroke="#0A0F1E" stroke-width="1.5"/><rect x="88" y="52" width="64" height="232" fill="#0E1626" stroke="#0A0F1E" stroke-width="2.5"/><rect x="88" y="94" width="64" height="42" fill="#FF4D00"/><polygon points="86,134 154,64 154,174 86,224" fill="url(#foil-m1l)" opacity="0.45"/><text x="120.0" y="121" text-anchor="middle" font-family="Archivo Black" font-size="18" fill="#FFFFFF" letter-spacing="-0.3">M1L</text><text x="120.0" y="238" text-anchor="middle" font-family="Archivo Black" font-size="22" fill="#FFFFFF" letter-spacing="-0.3">PACK</text><text x="120.0" y="262" text-anchor="middle" font-family="Archivo" font-weight="700" font-size="8" fill="#5C6780" letter-spacing="2">SEALED</text><polygon points="260,360 230,360 260,330" fill="#FF4D00" opacity="0.9"/><rect x="0" y="310" width="260" height="50" fill="url(#floor-m1l)"/><rect x="2" y="2" width="256" height="356" fill="none" stroke="#0A0F1E" stroke-width="2.5"/>
+</svg>
