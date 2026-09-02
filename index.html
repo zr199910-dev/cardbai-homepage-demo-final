@@ -10,6 +10,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;600;700;800&family=Archivo+Narrow:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+
 :root {
   --ink:            #0A0F1E;
   --ink-2:          #111729;
@@ -831,7 +834,7 @@ a { color: inherit; text-decoration: none; }
 .feat__cta.is-added { background: var(--ink-stock); }
 
 @media (max-width: 920px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 480px) { .feat-grid { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
 
 /* ========== SECTION 10: MORE SETS ========== */
 .more-grid {
